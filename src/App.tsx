@@ -1,31 +1,37 @@
 import React from 'react';
 import './App.css';
-import { ScheduleComponent, Inject, Agenda, Day, Month, Week, WorkWeek, EventSettingsModel } from '@syncfusion/ej2-react-schedule';
-import { DataManager,WebApiAdaptor } from '@syncfusion/ej2-data';
-class App extends React.Component {
-  private localData: EventSettingsModel = {
-    dataSource: [{
-      EndTime: new Date(2019, 0, 11, 6, 30),
-      StartTime: new Date(2019, 0, 11, 4, 0)
-    }]
-  };
-  private remoteData = new DataManager({
-    url: 'https://js.syncfusion.com/demos/ejservices/api/Schedule/LoadData', 
-    adaptor: new WebApiAdaptor, 
-    crossDomain: true 
-  });
- 
-  
-  render() {
-    return (
-      <ScheduleComponent currentView='Month'
-      eventSettings={{ dataSource: this.remoteData }} selectedDate={new Date(2017, 5, 5)} > 
-        <Inject services={[Day, Week, WorkWeek, Month, Agenda]} />
-      </ScheduleComponent>  
-      
-    );
-  }
+import { ScheduleComponent, Day, Week, WorkWeek, Month, Agenda, Inject } from '@syncfusion/ej2-react-schedule';
+
+function App() {
+  const data = [
+    {
+    Id: 1,
+    Subject: 'Paris',
+    StartTime: new Date(2023, 1, 15, 10, 0),
+    EndTime: new Date(2023, 1, 15, 12, 30),
+  },
+  {
+    Id: 2,
+    Subject: 'Germany',
+    StartTime: new Date(2023, 1, 17, 12, 0),
+    EndTime: new Date(2023, 1, 17, 13, 30),
+  },
+  {
+    Id: 3,
+    Subject: 'England',
+    StartTime: new Date(2023, 1, 13, 9, 0),
+    EndTime: new Date(2023, 1, 13, 11, 0),
+  },
+];
+
+  const eventSettings = { dataSource: data }
+  return (
+    <div className="App">
+      <ScheduleComponent height='550px' selectedDate={new Date(2023, 1, 15)} eventSettings={eventSettings}>
+            <Inject services={[Day, Week, WorkWeek, Month, Agenda]} />
+          </ScheduleComponent>
+    </div>
+  );
 }
-   
 
 export default App;
